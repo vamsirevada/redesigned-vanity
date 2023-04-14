@@ -1,0 +1,9 @@
+node_modules/
+
+build/
+
+.eslintcache
+
+.env
+
+vanityindia.pem
