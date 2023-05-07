@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import FinanceRight from './FinanceRight';
-import ResponsiveFinanceRight from './ResponsiveFinanceRight';
-import { useParams } from 'react-router-dom';
-import { getProject, getProjectBudget } from '../../actions/project';
-import { getTransactions } from '../../actions/expense';
-import Moment from 'react-moment';
-import BudgetRight from './BudgetRight';
-import ResponsiveBudgetRight from './ResponsiveBudgetRight';
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import FinanceRight from './FinanceRight'
+import ResponsiveFinanceRight from './ResponsiveFinanceRight'
+import { useParams } from 'react-router-dom'
+import { getProject, getProjectBudget } from '../../actions/project'
+import { getTransactions } from '../../actions/expense'
+import Moment from 'react-moment'
+import BudgetRight from './BudgetRight'
+import ResponsiveBudgetRight from './ResponsiveBudgetRight'
+import back from '../../images/back.svg'
 
 const Finance = ({
   auth: { user },
@@ -17,65 +19,67 @@ const Finance = ({
   project: { singleproject, budget },
   expense: { transactions },
 }) => {
-  const params = useParams();
-  const [show, setshow] = useState(true);
-  const [spender, setSpender] = useState(true);
-  const [respo, setRespo] = useState(false);
-  const [budgetRespo, setBudgetRespo] = useState(false);
-  const [start, setStart] = useState(false);
+  const params = useParams()
+  const [show, setshow] = useState(true)
+  const [spender, setSpender] = useState(true)
+  const [respo, setRespo] = useState(false)
+  const [budgetRespo, setBudgetRespo] = useState(false)
+  const [start, setStart] = useState(false)
 
   useEffect(() => {
-    getProject(params.id);
-    getProjectBudget(params.id);
-    getTransactions(params.id);
-  }, [getProject, getTransactions, getProjectBudget, params.id]);
+    getProject(params.id)
+    getProjectBudget(params.id)
+    getTransactions(params.id)
+  }, [getProject, getTransactions, getProjectBudget, params.id])
 
-  const budgets = budget.map((x) => x.budget);
+  const budgets = budget.map((x) => x.budget)
 
-  const total = budgets.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  const total = budgets.reduce((acc, item) => (acc += item), 0).toFixed(2)
 
   const respoClose = () => {
-    setRespo(false);
-  };
+    setRespo(false)
+  }
 
   const respoClose1 = () => {
-    setBudgetRespo(false);
-  };
+    setBudgetRespo(false)
+  }
 
   return (
-    <div id='full-chat'>
-      <aside id='fullchat-left'>
-        <div className='fullchat-lefttop finance'>
+    <div id="full-chat">
+      <aside id="fullchat-left">
+        <div className="fullchat-lefttop finance">
           <div>
-            <input type='search' name='search' placeholder='Search finance' />
+            <Link className="icon" to={`/project/${params.id}`}>
+              <img src={back} className="white" alt="" />
+            </Link>
           </div>
         </div>
-        <div className='fullchat-leftcontainer'>
-          <div className='fullchat-leftbody'>
-            <div className='budget'>
-              <div className='budget-heading'>
+        <div className="fullchat-leftcontainer">
+          <div className="fullchat-leftbody">
+            <div className="budget">
+              <div className="budget-heading">
                 <h3>Total Budget</h3>
                 <div>
                   <a
-                    href='#!'
+                    href="#!"
                     onClick={() => {
-                      setBudgetRespo(!budgetRespo);
+                      setBudgetRespo(!budgetRespo)
                     }}
-                    className='blue'
+                    className="blue"
                   >
                     Add Budget
                   </a>
-                  <span className='divider-line'>{' | '}</span>
-                  <a href='#!' className='blue' onClick={(e) => setshow(true)}>
+                  <span className="divider-line">{' | '}</span>
+                  <a href="#!" className="blue" onClick={(e) => setshow(true)}>
                     See
                   </a>
-                  <span className='divider-line'>{' | '}</span>
-                  <a href='#!' className='blue' onClick={(e) => setshow(false)}>
+                  <span className="divider-line">{' | '}</span>
+                  <a href="#!" className="blue" onClick={(e) => setshow(false)}>
                     Hide
                   </a>
                 </div>
               </div>
-              <div className='budget-amount'>
+              <div className="budget-amount">
                 {show && (
                   <div>
                     <p>₹{total ? total : '0.00'}</p>
@@ -83,31 +87,31 @@ const Finance = ({
                 )}
               </div>
             </div>
-            <div className='expenses'>
-              <div className='expenses-heading'>
+            <div className="expenses">
+              <div className="expenses-heading">
                 <h3>Expenses </h3>
                 <div>
                   <a
                     onClick={() => {
-                      setRespo(!respo);
+                      setRespo(!respo)
                     }}
-                    href='#!'
-                    className='blue'
+                    href="#!"
+                    className="blue"
                   >
                     Add New Expenses{' '}
                   </a>
-                  <span className='divider-line'>{' | '}</span>
+                  <span className="divider-line">{' | '}</span>
                   <a
-                    href='#!'
-                    className='blue'
+                    href="#!"
+                    className="blue"
                     onClick={(e) => setSpender(true)}
                   >
                     See
                   </a>
-                  <span className='divider-line'>{' | '}</span>
+                  <span className="divider-line">{' | '}</span>
                   <a
-                    href='#!'
-                    className='blue'
+                    href="#!"
+                    className="blue"
                     onClick={(e) => setSpender(false)}
                   >
                     Hide
@@ -118,22 +122,22 @@ const Finance = ({
                 transactions.map((transaction) => (
                   <div key={transaction._id}>
                     <div
-                      className='expense-card'
+                      className="expense-card"
                       onClick={() => {
-                        setStart(!start);
+                        setStart(!start)
                       }}
                     >
                       <p>
-                        <span className='blue'>Date :</span>{' '}
-                        <Moment format='DD MMM YY'>
+                        <span className="blue">Date :</span>{' '}
+                        <Moment format="DD MMM YY">
                           {transactions[transactions.length - 1]?.date}
                         </Moment>
                       </p>
                       <p>
-                        <span className='blue'>By:</span> Dhoni
+                        <span className="blue">By:</span> {user.fullName}
                       </p>
                     </div>
-                    <hr className='Hori' />
+                    <hr className="Hori" />
                   </div>
                 ))}
             </div>
@@ -145,6 +149,7 @@ const Finance = ({
             transactions={transactions}
             singleproject={singleproject}
             respoClose={respoClose}
+            userId={user._id}
           />
         )}
 
@@ -152,6 +157,7 @@ const Finance = ({
           <ResponsiveBudgetRight
             singleproject={singleproject}
             respoClose={respoClose1}
+            userId={user._id}
           />
         )}
       </aside>
@@ -160,21 +166,24 @@ const Finance = ({
           start={start}
           transactions={transactions}
           singleproject={singleproject}
+          userId={user._id}
         />
       )}
-      {budgetRespo && <BudgetRight singleproject={singleproject} />}
+      {budgetRespo && (
+        <BudgetRight singleproject={singleproject} userId={user._id} />
+      )}
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   expense: state.expense,
   project: state.project,
-});
+})
 
 export default connect(mapStateToProps, {
   getProject,
   getProjectBudget,
   getTransactions,
-})(Finance);
+})(Finance)

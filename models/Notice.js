@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const NoticeSchema = new Schema({
   project: {
@@ -33,6 +33,9 @@ const NoticeSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'profile',
       },
+      avatar: {
+        type: String,
+      },
     },
   ],
   shortlisted: [
@@ -41,6 +44,9 @@ const NoticeSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'profile',
       },
+      avatar: {
+        type: String,
+      },
     },
   ],
 
@@ -48,6 +54,6 @@ const NoticeSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-});
+})
 
-module.exports = mongoose.model('notice', NoticeSchema);
+module.exports = mongoose.model('notice', NoticeSchema)

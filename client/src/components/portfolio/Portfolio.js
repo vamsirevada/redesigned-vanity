@@ -1,38 +1,38 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getProjects } from '../../actions/project';
-import { getBuddies } from '../../actions/profile';
-import Loader from '../layout/Loader';
-import briefcase from '../../images/icons/nounBriefcase.svg';
-import nounEducation from '../../images/icons/noun_education_2177318.svg';
-import nounSkill from '../../images/icons/noun_skill_1863702.svg';
-import nounevent from '../../images/icons/noun_event_1828492.svg';
-import nounAwards from '../../images/icons/noun_Trophy_2135552.svg';
-import f124 from '../../images/Image124.png';
-import EditButton from './EditButton';
-import PortfolioLeftTop from './PortfolioLeftTop';
-import PortfolioLeftAbout from './PortfolioLeftAbout';
-import PortfolioLeftExperience from './PortfolioLeftExperience';
-import PortfolioLeftEducation from './PortfolioLeftEducation';
-import PortfolioLeftAwards from './PortfolioLeftAwards';
-import PortfolioLeftSkill from './PortfolioLeftSkill';
-import PortfolioLeftEvent from './PortfolioLeftEvent';
-import PortfolioRightBody from './PortfolioRightBody';
-import GPortfolioLeftTeam from './GPortfolioLeftTeam';
-import GPortfolioLeftPartner from './GPortfolioLeftPartner';
-import GPortfolioLeftClient from './GPortfolioLeftClient';
-import GPortfolioLeftContact from './GPortfolioLeftContact';
-import PortfolioRightBuddies from './PortfolioRIghtBuddies';
-import ProjectTemp from '../projects/ProjectTemp';
-import ExpTemp from '../projects/ExpTemp';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
-import { Link } from 'react-router-dom';
-import { ShepherdTourContext } from 'react-shepherd';
-import PortfolioStrength from './PortfolioStrength';
-import UseFirestore from '../addportfolio/UseFireStore';
+import React, { Fragment, useState, useEffect, useContext } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { getProjects } from '../../actions/project'
+import { getBuddies } from '../../actions/profile'
+import Loader from '../layout/Loader'
+import briefcase from '../../images/icons/nounBriefcase.svg'
+import nounEducation from '../../images/icons/noun_education_2177318.svg'
+import nounSkill from '../../images/icons/noun_skill_1863702.svg'
+import nounevent from '../../images/icons/noun_event_1828492.svg'
+import nounAwards from '../../images/icons/noun_Trophy_2135552.svg'
+import f124 from '../../images/Image124.png'
+import EditButton from './EditButton'
+import PortfolioLeftTop from './PortfolioLeftTop'
+import PortfolioLeftAbout from './PortfolioLeftAbout'
+import PortfolioLeftExperience from './PortfolioLeftExperience'
+import PortfolioLeftEducation from './PortfolioLeftEducation'
+import PortfolioLeftAwards from './PortfolioLeftAwards'
+import PortfolioLeftSkill from './PortfolioLeftSkill'
+import PortfolioLeftEvent from './PortfolioLeftEvent'
+import PortfolioRightBody from './PortfolioRightBody'
+import GPortfolioLeftTeam from './GPortfolioLeftTeam'
+import GPortfolioLeftPartner from './GPortfolioLeftPartner'
+import GPortfolioLeftClient from './GPortfolioLeftClient'
+import GPortfolioLeftContact from './GPortfolioLeftContact'
+import PortfolioRightBuddies from './PortfolioRIghtBuddies'
+import ProjectTemp from '../projects/ProjectTemp'
+import ExpTemp from '../projects/ExpTemp'
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd'
+import InsertPhotoIcon from '@material-ui/icons/InsertPhoto'
+import { Link } from 'react-router-dom'
+import { ShepherdTourContext } from 'react-shepherd'
+import PortfolioStrength from './PortfolioStrength'
+import UseFirestore from '../addportfolio/UseFireStore'
 
 const Portfolio = ({
   getProjects,
@@ -42,66 +42,66 @@ const Portfolio = ({
   project: { projects },
 }) => {
   useEffect(() => {
-    getProjects(user?._id);
-    getBuddies();
-  }, [getProjects, getBuddies, user?._id]);
+    getProjects(user?._id)
+    getBuddies()
+  }, [getProjects, getBuddies, user?._id])
 
-  const tour = useContext(ShepherdTourContext);
-  const { docs } = UseFirestore('images');
-  const [displayLeft, toogleLeft] = useState(true);
-  const [displayRight, toogleRight] = useState(true);
-  const [displayPortfolio, tooglePortfolio] = useState(true);
-  const [displayBuddies, toogleBuddies] = useState(false);
-  const [displayProjects, toogleProjects] = useState(false);
-  const [viewAll1, setViewAll1] = useState(false);
-  const [viewAll2, setViewAll2] = useState(false);
-  const [viewAll3, setViewAll3] = useState(false);
-  const [viewAll4, setViewAll4] = useState(false);
-  const [viewAll5, setViewAll5] = useState(false);
+  const tour = useContext(ShepherdTourContext)
+  const { docs } = UseFirestore('images')
+  const [displayLeft, toogleLeft] = useState(true)
+  const [displayRight, toogleRight] = useState(true)
+  const [displayPortfolio, tooglePortfolio] = useState(true)
+  const [displayBuddies, toogleBuddies] = useState(false)
+  const [displayProjects, toogleProjects] = useState(false)
+  const [viewAll1, setViewAll1] = useState(false)
+  const [viewAll2, setViewAll2] = useState(false)
+  const [viewAll3, setViewAll3] = useState(false)
+  const [viewAll4, setViewAll4] = useState(false)
+  const [viewAll5, setViewAll5] = useState(false)
 
-  const xyz = docs.filter((i) => i.userId === user?._id);
+  const xyz = docs.filter((i) => i.userId === user?._id)
 
   const onClick1 = (e) => {
-    toogleLeft(true);
-    toogleRight(false);
-  };
+    toogleLeft(true)
+    toogleRight(false)
+  }
   const onClick2 = (e) => {
-    toogleLeft(false);
-    toogleRight(true);
-  };
+    toogleLeft(false)
+    toogleRight(true)
+  }
 
   const PortOn = (e) => {
-    tooglePortfolio(true);
-    toogleBuddies(false);
-    toogleProjects(false);
-  };
+    tooglePortfolio(true)
+    toogleBuddies(false)
+    toogleProjects(false)
+  }
   const BudOn = (e) => {
-    tooglePortfolio(false);
-    toogleBuddies(true);
-    toogleProjects(false);
-  };
+    tooglePortfolio(false)
+    toogleBuddies(true)
+    toogleProjects(false)
+  }
   const ProjectOn = (e) => {
-    tooglePortfolio(false);
-    toogleBuddies(false);
-    toogleProjects(true);
-  };
+    tooglePortfolio(false)
+    toogleBuddies(false)
+    toogleProjects(true)
+  }
 
   return (
     <>
       <div
-        data-aos='fade-out'
-        data-aos-delay='10'
-        data-aos-duration='500'
-        data-aos-easing='ease-in'
+        data-aos="fade-out"
+        data-aos-delay="10"
+        data-aos-duration="500"
+        data-aos-easing="ease-in"
       >
-        <div className='ribbon'>
+        <div className="ribbon">
           <a
             onClick={(e) => onClick1(e)}
             className={displayLeft ? 'ribbon-left-active' : 'ribbon-left'}
           >
             <AssignmentIndIcon />
           </a>
-          <a onClick={(e) => onClick2(e)} className='ribbon-right'>
+          <a onClick={(e) => onClick2(e)} className="ribbon-right">
             <InsertPhotoIcon />
           </a>
         </div>
@@ -109,30 +109,30 @@ const Portfolio = ({
         <Fragment>
           {profile !== null ? (
             <Fragment>
-              <div id='portfolio'>
+              <div id="portfolio">
                 {displayLeft && (
-                  <div className='portfolio-left'>
-                    <div id='left-sidebar'>
-                      <div className='left-container'>
+                  <div className="portfolio-left">
+                    <div id="left-sidebar">
+                      <div className="left-container">
                         <PortfolioLeftTop profile={profile} />
                         <EditButton profile={profile} />
                         <PortfolioLeftAbout profile={profile} />
                         {profile?.founder.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3> Founder </h3>
                             </div>
-                            <hr className='hori' />
+                            <hr className="hori" />
 
-                            <div className='prof-btn'>
-                              <div className='prof-btn-flex'>
-                                <div className='prof-top prof-top-edu founder'>
-                                  <div className='prof-pic'>
-                                    <img src={f124} alt='' />
+                            <div className="prof-btn">
+                              <div className="prof-btn-flex">
+                                <div className="prof-top prof-top-edu founder">
+                                  <div className="prof-pic">
+                                    <img src={f124} alt="" />
                                   </div>
                                   <div>
                                     <p>
-                                      <a className='bold bold-1'>
+                                      <a className="bold bold-1">
                                         {profile.founder}
                                       </a>{' '}
                                       <br />
@@ -144,16 +144,16 @@ const Portfolio = ({
                           </div>
                         )}
                         {profile.teammembers.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3> Team Members </h3>
-                              <a className='text-blue'>View all</a>
+                              <a className="text-blue">View all</a>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
 
-                            <div className='prof-btn'>
-                              <div className='prof-btn-flex'>
+                            <div className="prof-btn">
+                              <div className="prof-btn-flex">
                                 {profile.teammembers.length > 0 ? (
                                   <Fragment>
                                     {profile.teammembers.map((team) => (
@@ -171,20 +171,20 @@ const Portfolio = ({
                           </div>
                         )}
                         {profile.experience.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3>
                                 {' '}
                                 <img
-                                  className='resize'
+                                  className="resize"
                                   src={briefcase}
-                                  alt=''
+                                  alt=""
                                 />{' '}
                                 Professional Experience
                               </h3>
                               <div
                                 onClick={() => {
-                                  setViewAll1(!viewAll1);
+                                  setViewAll1(!viewAll1)
                                 }}
                                 style={{
                                   display:
@@ -192,16 +192,16 @@ const Portfolio = ({
                                   color: '#8D4EFF',
                                   cursor: 'pointer',
                                 }}
-                                className='text-blue'
+                                className="text-blue"
                               >
                                 See more
                               </div>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
 
-                            <div className='prof-btn'>
-                              <div className='prof-btn-flex'>
+                            <div className="prof-btn">
+                              <div className="prof-btn-flex">
                                 {profile.experience.length > 0 ? (
                                   <Fragment>
                                     {profile.experience
@@ -225,20 +225,20 @@ const Portfolio = ({
                         )}
 
                         {profile.education.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3>
                                 {' '}
                                 <img
-                                  className='resize-1'
+                                  className="resize-1"
                                   src={nounEducation}
-                                  alt=''
+                                  alt=""
                                 />{' '}
                                 Education
                               </h3>
                               <div
                                 onClick={() => {
-                                  setViewAll2(!viewAll2);
+                                  setViewAll2(!viewAll2)
                                 }}
                                 style={{
                                   display:
@@ -246,13 +246,13 @@ const Portfolio = ({
                                   color: '#8D4EFF',
                                   cursor: 'pointer',
                                 }}
-                                className='text-blue'
+                                className="text-blue"
                               >
                                 See more
                               </div>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
 
                             {profile.education.length > 0 ? (
                               <Fragment>
@@ -275,16 +275,16 @@ const Portfolio = ({
                         )}
 
                         {profile.partners.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3>Our Partners</h3>
-                              <a className='text-blue'>See more</a>
+                              <a className="text-blue">See more</a>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
 
-                            <div className='prof-btn'>
-                              <div className='prof-btn-flex'>
+                            <div className="prof-btn">
+                              <div className="prof-btn-flex">
                                 {profile.partners.length > 0 ? (
                                   <Fragment>
                                     {profile.partners.map((partner) => (
@@ -303,16 +303,16 @@ const Portfolio = ({
                         )}
 
                         {profile.clients.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3> Our Cilents</h3>
-                              <a className='text-blue'>See more</a>
+                              <a className="text-blue">See more</a>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
 
-                            <div className='prof-btn'>
-                              <div className='prof-btn-flex'>
+                            <div className="prof-btn">
+                              <div className="prof-btn-flex">
                                 {profile.clients.length > 0 ? (
                                   <Fragment>
                                     {profile.clients.map((client) => (
@@ -331,20 +331,20 @@ const Portfolio = ({
                         )}
 
                         {profile.awards.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3>
                                 {' '}
                                 <img
-                                  className='resize'
+                                  className="resize"
                                   src={nounAwards}
-                                  alt=''
+                                  alt=""
                                 />{' '}
                                 Awards & Honours
                               </h3>
                               <div
                                 onClick={() => {
-                                  setViewAll3(!viewAll3);
+                                  setViewAll3(!viewAll3)
                                 }}
                                 style={{
                                   display:
@@ -352,13 +352,13 @@ const Portfolio = ({
                                   color: '#8D4EFF',
                                   cursor: 'pointer',
                                 }}
-                                className='text-blue'
+                                className="text-blue"
                               >
                                 See more
                               </div>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
                             {profile.awards.length > 0 ? (
                               <Fragment>
                                 {profile.awards
@@ -380,20 +380,20 @@ const Portfolio = ({
                         )}
 
                         {profile.skills.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3>
                                 {' '}
                                 <img
-                                  className='resize-1'
+                                  className="resize-1"
                                   src={nounSkill}
-                                  alt=''
+                                  alt=""
                                 />{' '}
                                 Skills
                               </h3>
                               <div
                                 onClick={() => {
-                                  setViewAll4(!viewAll4);
+                                  setViewAll4(!viewAll4)
                                 }}
                                 style={{
                                   display:
@@ -401,16 +401,16 @@ const Portfolio = ({
                                   color: '#8D4EFF',
                                   cursor: 'pointer',
                                 }}
-                                className='text-blue'
+                                className="text-blue"
                               >
                                 See more
                               </div>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
 
-                            <div className='prof-btn'>
-                              <div className='prof-btn-flex'>
+                            <div className="prof-btn">
+                              <div className="prof-btn-flex">
                                 {profile.skills.length > 0 && (
                                   <Fragment>
                                     {profile.skills
@@ -431,20 +431,20 @@ const Portfolio = ({
                           </div>
                         )}
                         {profile.events.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3>
                                 {' '}
                                 <img
-                                  className='resize-1'
+                                  className="resize-1"
                                   src={nounevent}
-                                  alt=''
+                                  alt=""
                                 />{' '}
                                 Events
                               </h3>
                               <div
                                 onClick={() => {
-                                  setViewAll5(!viewAll5);
+                                  setViewAll5(!viewAll5)
                                 }}
                                 style={{
                                   display:
@@ -452,16 +452,16 @@ const Portfolio = ({
                                   color: '#8D4EFF',
                                   cursor: 'pointer',
                                 }}
-                                className='text-blue'
+                                className="text-blue"
                               >
                                 See more
                               </div>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
 
-                            <div className='prof-btn'>
-                              <div className='prof-btn-flex'>
+                            <div className="prof-btn">
+                              <div className="prof-btn-flex">
                                 {profile.events.length > 0 && (
                                   <Fragment>
                                     {profile.events
@@ -482,17 +482,17 @@ const Portfolio = ({
                           </div>
                         )}
                         {profile.contactus.length > 0 && (
-                          <div className='prof-exp'>
-                            <div className='prof-exp-heading'>
+                          <div className="prof-exp">
+                            <div className="prof-exp-heading">
                               <h3>Contact Us:</h3>
-                              <a className='text-blue'>See more</a>
+                              <a className="text-blue">See more</a>
                             </div>
 
-                            <hr className='hori' />
+                            <hr className="hori" />
 
-                            <div className='prof-btn'>
-                              <div className='prof-btn-flex'>
-                                <div className='profile-table profile-table-1'>
+                            <div className="prof-btn">
+                              <div className="prof-btn-flex">
+                                <div className="profile-table profile-table-1">
                                   {profile.contactus.map((contactus) => (
                                     <GPortfolioLeftContact
                                       key={contactus._id}
@@ -507,13 +507,13 @@ const Portfolio = ({
                         {profile.experience.length === 0 &&
                           profile.founder.length === 0 &&
                           profile.education.length === 0 && (
-                            <div className='add-profile'>
+                            <div className="add-profile">
                               <hr />
                               <p>
                                 To add Experience/ Education/ Skills/
                                 Team-Members/ Awards etc., Click Add to Profile
                               </p>
-                              <Link to='/profile' className='btn-white'>
+                              <Link to="/profile" className="btn-white">
                                 Add Profile
                               </Link>
                             </div>
@@ -524,19 +524,19 @@ const Portfolio = ({
                 )}
 
                 {displayRight && (
-                  <div className='portfolio-right'>
-                    <div id='main-grid' className='port-grid'>
-                      <div className='main-grid-container'>
+                  <div className="portfolio-right">
+                    <div id="main-grid" className="port-grid">
+                      <div className="main-grid-container">
                         {/* {profile !== null && (
                           <PortfolioRightTop
                             profile={profile}
                             projects={projects}
                           />
                         )} */}
-                        <div className='main-grid-top'>
-                          <div className='profile-info-box p-black'>
-                            <a href='#!' onClick={() => PortOn()}>
-                              <p className='border-1'>
+                        <div className="main-grid-top">
+                          <div className="profile-info-box p-black">
+                            <a href="#!" onClick={() => PortOn()}>
+                              <p className="border-1">
                                 View
                                 <span
                                   className={
@@ -547,9 +547,9 @@ const Portfolio = ({
                                 </span>
                               </p>
                             </a>
-                            <a href='#!' onClick={() => BudOn()}>
-                              <p className='border-1'>
-                                <span className='f-1'>
+                            <a href="#!" onClick={() => BudOn()}>
+                              <p className="border-1">
+                                <span className="f-1">
                                   {buddies && buddies.length}
                                 </span>
 
@@ -563,9 +563,9 @@ const Portfolio = ({
                                 </span>
                               </p>
                             </a>
-                            <a href='#!' onClick={() => ProjectOn()}>
+                            <a href="#!" onClick={() => ProjectOn()}>
                               <p>
-                                <span className='f-1'>
+                                <span className="f-1">
                                   {projects.length > 0 ||
                                   profile?.experience.length > 0
                                     ? projects.length +
@@ -583,11 +583,11 @@ const Portfolio = ({
                             </a>
                           </div>
 
-                          <div className='mutual-frds'>
-                            <div className='prof-heading-flex'>
+                          <div className="mutual-frds">
+                            <div className="prof-heading-flex">
                               <Link to={'/addfiles'}>
                                 <h4>
-                                  <span className='bg-1 addtoportfolio'>
+                                  <span className="bg-1 addtoportfolio">
                                     Add to Portfolio
                                   </span>
                                 </h4>
@@ -600,7 +600,7 @@ const Portfolio = ({
                           profile={profile}
                           xyz={xyz}
                         />
-                        <div className='main-grid-body'>
+                        <div className="main-grid-body">
                           {displayPortfolio && profile !== null && (
                             <PortfolioRightBody docs={docs} profile={profile} />
                           )}
@@ -608,7 +608,7 @@ const Portfolio = ({
                             <Fragment>
                               {buddies.length === 0 ? (
                                 <Fragment>
-                                  <h2 className='none'> None </h2>
+                                  <h2 className="none"> None </h2>
                                 </Fragment>
                               ) : (
                                 <Fragment>
@@ -623,8 +623,8 @@ const Portfolio = ({
                             </Fragment>
                           )}
                           {displayProjects && (
-                            <div className='project'>
-                              <div className='project-container'>
+                            <div className="project">
+                              <div className="project-container">
                                 {projects.length > 0 && (
                                   <Fragment>
                                     <div>
@@ -663,33 +663,35 @@ const Portfolio = ({
                   </div>
                 )}
               </div>
-              <button onClick={tour.start} className='demo-tour-button'>
-                Start Demo Tour
-                <span className='tooltiptext'>
-                  <div className='arrow-up'></div>
-                  Take a Tour to get to know about features of website
-                </span>
-              </button>
+              {!profile.progressStatus && (
+                <button onClick={tour.start} className="demo-tour-button">
+                  Start Demo Tour
+                  <span className="tooltiptext">
+                    <div className="arrow-up"></div>
+                    Take a Tour to get to know about features of website
+                  </span>
+                </button>
+              )}
             </Fragment>
           ) : (
-            <Loader data-aos-duration='1000' />
+            <Loader data-aos-duration="1000" />
           )}
         </Fragment>
       </div>
     </>
-  );
-};
+  )
+}
 
 Portfolio.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
-};
+}
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
   project: state.project,
-});
+})
 
-export default connect(mapStateToProps, { getProjects, getBuddies })(Portfolio);
+export default connect(mapStateToProps, { getProjects, getBuddies })(Portfolio)

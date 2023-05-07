@@ -1,60 +1,60 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import sendbutton from '../../images/sendbutton.svg';
-import { updateMessage } from '../../actions/chat';
-import { projectFirestore } from '../../firebase/config';
-import logo from '../../images/dummyimage.jpg';
+import React, { useState } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import sendbutton from '../../images/sendbutton.svg'
+import { updateMessage } from '../../actions/chat'
+import { projectFirestore } from '../../firebase/config'
+import logo from '../../images/dummyimage.jpg'
 
 const PersonalMessage = ({ auth: { user }, member, chatClose }) => {
-  const dispatch = useDispatch();
-  const [formValue, setFormValue] = useState('');
+  const dispatch = useDispatch()
+  const [formValue, setFormValue] = useState('')
 
   const sendMessage = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const msgObj = {
       user_uid_1: user?._id,
-      user_uid_2: member?.user?._id,
+      user_uid_2: member?.user,
       formValue,
-    };
+    }
     if (formValue !== '') {
       dispatch(updateMessage(msgObj)).then(() => {
-        setFormValue('');
+        setFormValue('')
         projectFirestore.collection('notifications').add({
           sender: user?._id,
           senderName: user?.userName,
           avatar: user?.avatar,
-          receiver: member?.user?._id,
+          receiver: member?.user,
           type: 'chat',
           read: false,
           createdAt: new Date(),
-        });
-      });
+        })
+      })
     }
-  };
+  }
 
   return (
     <div
       onClick={(e) => {
         if (e.target.classList.contains('personalmessagepopupscreen')) {
-          chatClose();
+          chatClose()
         }
       }}
-      className='personalmessagepopupscreen'
+      className="personalmessagepopupscreen"
     >
-      <div className='personalmessagepopup'>
-        <div className='personalmessagepopup-header'>
-          <div className='personalmessagepopup-heading'>
+      <div className="personalmessagepopup">
+        <div className="personalmessagepopup-header">
+          <div className="personalmessagepopup-heading">
             <span
               style={{
                 background: `url(${
                   member?.avatar ? member?.avatar : logo
                 }) no-repeat center center/cover`,
               }}
-              className='dp-1'
+              className="dp-1"
             >
               {member?.user?.activityStatus === 'online' && (
-                <span className='dp-1-dot'></span>
+                <span className="dp-1-dot"></span>
               )}
             </span>
             <div>
@@ -68,37 +68,37 @@ const PersonalMessage = ({ auth: { user }, member, chatClose }) => {
               )}
             </div>
           </div>
-          <div onClick={chatClose} className='personalmessagepopup-cross'>
+          <div onClick={chatClose} className="personalmessagepopup-cross">
             x
           </div>
         </div>
 
-        <form className='form-container-2'>
-          <div className='form-grid'>
-            <div className='form-flex-left'>
+        <form className="form-container-2">
+          <div className="form-grid">
+            <div className="form-flex-left">
               <input
-                type='text'
-                name='typemessage'
+                type="text"
+                name="typemessage"
                 value={formValue}
-                placeholder='Type your Message'
+                placeholder="Type your Message"
                 onChange={(e) => setFormValue(e.target.value)}
               />
             </div>
-            <div className='form-flex-right'>
-              <a type='submit'>
-                <img src={sendbutton} onClick={sendMessage} alt='' />
+            <div className="form-flex-right">
+              <a type="submit">
+                <img src={sendbutton} onClick={sendMessage} alt="" />
               </a>
             </div>
           </div>
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
-});
+})
 
-export default connect(mapStateToProps)(PersonalMessage);
+export default connect(mapStateToProps)(PersonalMessage)

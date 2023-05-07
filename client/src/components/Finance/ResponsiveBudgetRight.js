@@ -1,45 +1,45 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { useParams } from 'react-router';
-import { connect } from 'react-redux';
-import { addBudget } from '../../actions/project';
-import logo from '../../images/dummyimage.jpg';
-import Close from '../../images/Group 6054.svg';
+import React, { useState } from 'react'
+import { useParams } from 'react-router'
+import { connect } from 'react-redux'
+import { addBudget } from '../../actions/project'
+import logo from '../../images/dummyimage.jpg'
+import Close from '../../images/Group 6054.svg'
 
 const ResponsiveBudgetRight = ({ singleproject, addBudget, respoClose }) => {
-  const params = useParams();
-  const [text, setText] = useState('');
-  const [budget, setBudget] = useState(0);
+  const params = useParams()
+  const [text, setText] = useState('')
+  const [budget, setBudget] = useState(0)
 
-  const budgets = singleproject.projectbudget.map((x) => x.budget);
+  const budgets = singleproject.projectbudget.map((x) => x.budget)
 
-  const total = budgets.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  const total = budgets.reduce((acc, item) => (acc += item), 0).toFixed(2)
 
   const onSubmit = () => {
     const newBudget = {
       text,
       budget: +budget,
-    };
-    addBudget(params.id, newBudget);
-    setText('');
-    setBudget(0);
-  };
+    }
+    addBudget(params.id, newBudget)
+    setText('')
+    setBudget(0)
+  }
 
   return (
-    <section className='fullchat-right responsive'>
-      <div className='fullchat-right-responsive-container'>
-        <div className='fullchat-maintop expenses-tracker'>
-          <div className='fullchat-maintop-left'>
-            <div className='chatboxtop-right'>
+    <section className="fullchat-right responsive">
+      <div className="fullchat-right-responsive-container">
+        <div className="fullchat-maintop expenses-tracker">
+          <div className="fullchat-maintop-left">
+            <div className="chatboxtop-right">
               <a
-                type='button'
-                className='cancel'
+                type="button"
+                className="cancel"
                 onClick={() => {
-                  respoClose();
+                  respoClose()
                 }}
               >
-                <img src={Close} alt='' />
+                <img src={Close} alt="" />
               </a>
             </div>
             <div
@@ -48,23 +48,23 @@ const ResponsiveBudgetRight = ({ singleproject, addBudget, respoClose }) => {
                   singleproject?.avatar ? singleproject?.avatar : logo
                 }) no-repeat center center/cover`,
               }}
-              className='display-pic'
+              className="display-pic"
             ></div>
-            <div className='flex-column'>
-              <div className='chat-name'>
-                <a href='#!'>{singleproject?.projectname}</a>
+            <div className="flex-column">
+              <div className="chat-name">
+                <a href="#!">{singleproject?.projectname}</a>
               </div>
-              <div className='chat-body'>
+              <div className="chat-body">
                 <p>Project Budget</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className='expenses-mainbody'>
-          <div className='expenses-mainbody-container'>
+        <div className="expenses-mainbody">
+          <div className="expenses-mainbody-container">
             <div>
-              <table className='expenses-table'>
+              <table className="expenses-table">
                 <thead>
                   <tr>
                     <th>S.No</th>
@@ -91,17 +91,17 @@ const ResponsiveBudgetRight = ({ singleproject, addBudget, respoClose }) => {
           </div>
         </div>
 
-        <div className='expenses-type'>
-          <div className=' expenses-tracker'>
+        <div className="expenses-type">
+          <div className=" expenses-tracker">
             <div>
               <h3>Add Budget</h3>
             </div>
-            <div className='expenses-tracker-flex'>
+            <div className="expenses-tracker-flex">
               <div>
                 <label>Particular</label>
                 <br />
                 <input
-                  type='text'
+                  type="text"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                 />
@@ -110,23 +110,23 @@ const ResponsiveBudgetRight = ({ singleproject, addBudget, respoClose }) => {
                 <label>Amount</label>
                 <br />
                 <input
-                  type='number'
+                  type="number"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
                 />
               </div>
             </div>
-            <div className='form-flex-right'>
-              <a onClick={onSubmit} href='#!'>
+            <div className="form-flex-right">
+              <a onClick={onSubmit} href="#!">
                 Add
               </a>
-              <a href='#!'>Submit</a>
+              {/* <a href='#!'>Submit</a> */}
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default connect(null, { addBudget })(ResponsiveBudgetRight);
+export default connect(null, { addBudget })(ResponsiveBudgetRight)

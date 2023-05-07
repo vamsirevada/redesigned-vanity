@@ -1,27 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import mail from '../../images/mail.svg';
-import logo from '../../images/dummyimage.jpg';
-import { motion } from 'framer-motion';
-import PersonalMessage from '../chat/PersonalMessage';
-import NotePeoplePopUp from '../posts/NotePeoplePopUp';
-import noteimg from '../../images/icons/summarize-24px.svg';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import Tooltip from '@material-ui/core/Tooltip';
-import CRequest from './CRequest';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import mail from '../../images/mail.svg'
+import logo from '../../images/dummyimage.jpg'
+import { motion } from 'framer-motion'
+import PersonalMessage from '../chat/PersonalMessage'
+import NotePeoplePopUp from '../posts/NotePeoplePopUp'
+import noteimg from '../../images/icons/summarize-24px.svg'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import Tooltip from '@material-ui/core/Tooltip'
+import CRequest from './CRequest'
 
 const ProfileItem = ({ item, displayAdd, docs }) => {
-  const [start, setStart] = useState(false);
-  const [show, setShow] = useState(false);
+  const [start, setStart] = useState(false)
+  const [show, setShow] = useState(false)
 
   const close = () => {
-    setShow(false);
-  };
+    setShow(false)
+  }
 
   const chatClose = () => {
-    setStart(false);
-  };
+    setStart(false)
+  }
 
   const documents =
     docs &&
@@ -30,7 +30,7 @@ const ProfileItem = ({ item, displayAdd, docs }) => {
         doc?.userId === item?.user?._id &&
         doc?.type !== 'Audio' &&
         doc?.type !== 'Blog'
-    );
+    )
 
   return (
     <>
@@ -42,62 +42,62 @@ const ProfileItem = ({ item, displayAdd, docs }) => {
         status={item?.status}
         user={item?.user}
       />
-      <div className='connect-container'>
-        <div className='connect-main'>
-          <div className='connect-left'>
-            <div className='connect-left-top'>
+      <div className="connect-container">
+        <div className="connect-main">
+          <div className="connect-left">
+            <div className="connect-left-top">
               <div
                 style={{
                   background: `url(${
                     item?.avatar ? item?.avatar : logo
                   }) no-repeat center center/cover`,
                 }}
-                className='display-pic'
+                className="display-pic"
               ></div>
-              <div className='flex-c'>
+              <div className="flex-c">
                 <p>
-                  <span className='bold'>
+                  <span className="bold">
                     {item?.user?.fullName && item?.user?.fullName}
                     {item?.user?.groupName && item?.user?.groupName}
                   </span>{' '}
                   <br />
-                  <span className='second-bold'></span>{' '}
-                  <span className='second-bold'>{item?.status}</span> <br />
-                  <span className='second-bold'>{item?.location}</span>
+                  <span className="second-bold"></span>{' '}
+                  <span className="second-bold">{item?.status}</span> <br />
+                  <span className="second-bold">{item?.location}</span>
                   <br />
-                  <span className='third-bold'>
+                  <span className="third-bold">
                     Connections :{' '}
-                    <span className='f-1'>{item?.buddies.length}</span>
+                    <span className="f-1">{item?.buddies.length}</span>
                   </span>
                 </p>
               </div>
-              <div className='note'>
+              <div className="note">
                 {' '}
-                <a href='#!' onClick={() => setShow(true)}>
-                  <Tooltip title='Note Profile' placement='top'>
-                    <img src={noteimg} alt='' />
+                <a href="#!" onClick={() => setShow(true)}>
+                  <Tooltip title="Note Profile" placement="top">
+                    <img src={noteimg} alt="" />
                   </Tooltip>
                 </a>
               </div>
             </div>
 
-            <div className='connect-left-bottom'>
-              <div className='btn-b'>
+            <div className="connect-left-bottom">
+              <div className="btn-b">
                 {' '}
-                <Link to={`/portfolio/${item?.user?._id}`} className='btn-blue'>
+                <Link to={`/portfolio/${item?.user}`} className="btn-blue">
                   Portfolio
                 </Link>
               </div>
               <CRequest item={item} />
-              <div className='btn-g'>
-                <Tooltip title='Chat' placement='top'>
+              <div className="btn-g">
+                <Tooltip title="Chat" placement="top">
                   <a
                     onClick={() => {
-                      setStart(true);
+                      setStart(true)
                     }}
-                    className='btn-blue g-1'
+                    className="btn-blue g-1"
                   >
-                    <img src={mail} alt='' />
+                    <img src={mail} alt="" />
                   </a>
                 </Tooltip>
               </div>
@@ -105,15 +105,15 @@ const ProfileItem = ({ item, displayAdd, docs }) => {
           </div>
 
           {displayAdd && (
-            <div className='connect-right'>
+            <div className="connect-right">
               {documents &&
                 documents.slice(0, 4).map((doc) => (
-                  <div className='pic-1' key={doc.id}>
+                  <div className="pic-1" key={doc.id}>
                     {doc.type === 'Video' ? (
                       <motion.video
                         controls
                         src={doc.url}
-                        alt='uploaded pic'
+                        alt="uploaded pic"
                         initial={{
                           opacity: 0,
                           height: '100%',
@@ -125,9 +125,9 @@ const ProfileItem = ({ item, displayAdd, docs }) => {
                     ) : (
                       <motion.img
                         src={doc.url}
-                        height='100%'
-                        width='100%'
-                        alt=''
+                        height="100%"
+                        width="100%"
+                        alt=""
                       />
                     )}
                   </div>
@@ -138,7 +138,7 @@ const ProfileItem = ({ item, displayAdd, docs }) => {
         <div>
           {documents.length > 0 && (
             <Link to={`/portfolio/${item?.user?._id}`}>
-              <Tooltip title='View Portfolio' placement='top'>
+              <Tooltip title="View Portfolio" placement="top">
                 <ArrowForwardIosIcon />
               </Tooltip>
             </Link>
@@ -148,7 +148,7 @@ const ProfileItem = ({ item, displayAdd, docs }) => {
 
       {start && <PersonalMessage member={item} chatClose={chatClose} />}
     </>
-  );
-};
+  )
+}
 
-export default ProfileItem;
+export default ProfileItem

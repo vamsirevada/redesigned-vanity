@@ -1,54 +1,54 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router';
-import { connect } from 'react-redux';
-import { addBudget } from '../../actions/project';
-import logo from '../../images/dummyimage.jpg';
+import React, { useState } from 'react'
+import { useParams } from 'react-router'
+import { connect } from 'react-redux'
+import { addBudget } from '../../actions/project'
+import logo from '../../images/dummyimage.jpg'
 
 const BudgetRight = ({ singleproject, addBudget }) => {
-  const params = useParams();
-  const [text, setText] = useState('');
-  const [budget, setBudget] = useState(0);
+  const params = useParams()
+  const [text, setText] = useState('')
+  const [budget, setBudget] = useState(0)
 
-  const budgets = singleproject.projectbudget.map((x) => x.budget);
+  const budgets = singleproject.projectbudget.map((x) => x.budget)
 
-  const total = budgets.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  const total = budgets.reduce((acc, item) => (acc += item), 0).toFixed(2)
 
   const onSubmit = () => {
     const newBudget = {
       text,
       budget: +budget,
-    };
-    addBudget(params.id, newBudget);
-    setText('');
-    setBudget(0);
-  };
+    }
+    addBudget(params.id, newBudget)
+    setText('')
+    setBudget(0)
+  }
 
   return (
-    <section id='fullchat-right'>
-      <div className='fullchat-maintop expenses-tracker'>
-        <div className='fullchat-maintop-left'>
+    <section id="fullchat-right">
+      <div className="fullchat-maintop expenses-tracker">
+        <div className="fullchat-maintop-left">
           <div
             style={{
               background: `url(${
                 singleproject?.avatar ? singleproject?.avatar : logo
               }) no-repeat center center/cover`,
             }}
-            className='display-pic'
+            className="display-pic"
           ></div>
-          <div className='flex-column'>
-            <div className='chat-name'>
-              <a href='#!'>{singleproject?.projectname}</a>
+          <div className="flex-column">
+            <div className="chat-name">
+              <a href="#!">{singleproject?.projectname}</a>
             </div>
-            <div className='chat-body'>
+            <div className="chat-body">
               <p>Project Budget</p>
             </div>
           </div>
         </div>
       </div>
-      <div className='expenses-mainbody'>
-        <div className='expenses-mainbody-container'>
+      <div className="expenses-mainbody">
+        <div className="expenses-mainbody-container">
           <div>
-            <table className='expenses-table'>
+            <table className="expenses-table">
               <thead>
                 <tr>
                   <th>S.No</th>
@@ -74,17 +74,17 @@ const BudgetRight = ({ singleproject, addBudget }) => {
           </div>
         </div>
       </div>
-      <div className='expenses-type'>
-        <div className=' expenses-tracker'>
+      <div className="expenses-type">
+        <div className=" expenses-tracker">
           <div>
             <h3>Add Budget</h3>
           </div>
-          <div className='expenses-tracker-flex'>
+          <div className="expenses-tracker-flex">
             <div>
               <label>Particular</label>
               <br />
               <input
-                type='text'
+                type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
@@ -93,22 +93,22 @@ const BudgetRight = ({ singleproject, addBudget }) => {
               <label>Amount</label>
               <br />
               <input
-                type='number'
+                type="number"
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
               />
             </div>
           </div>
-          <div className='form-flex-right'>
-            <a onClick={onSubmit} href='#!'>
+          <div className="form-flex-right">
+            <a onClick={onSubmit} href="#!">
               Add
             </a>
-            <a href='#!'>Submit</a>
+            {/* <a href="#!">Submit</a> */}
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default connect(null, { addBudget })(BudgetRight);
+export default connect(null, { addBudget })(BudgetRight)

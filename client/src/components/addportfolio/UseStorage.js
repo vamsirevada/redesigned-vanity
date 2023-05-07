@@ -1,12 +1,12 @@
-import api from '../../utils/api';
-import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import api from '../../utils/api'
+import { useState, useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import {
   projectStorage,
   projectFirestore,
   timestamp,
-} from '../../firebase/config';
-import preview from '../../images/preview.png';
+} from '../../firebase/config'
+import preview from '../../images/preview.png'
 
 const UseStorage = (
   user,
@@ -22,32 +22,32 @@ const UseStorage = (
   setStringLength,
   setDisplay
 ) => {
-  const [progress, setProgress] = useState(0);
-  const [error, setError] = useState(null);
-  const [url, setUrl] = useState(null);
+  const [progress, setProgress] = useState(0)
+  const [error, setError] = useState(null)
+  const [url, setUrl] = useState(null)
 
   useEffect(() => {
     // references
-    const storageRef = projectStorage.ref(file.name);
+    const storageRef = projectStorage.ref(file.name)
 
-    const collectionRef = projectFirestore.collection('images');
+    const collectionRef = projectFirestore.collection('images')
 
     storageRef.put(file).on(
       'state_changed',
       (snap) => {
-        let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
-        setProgress(percentage);
+        let percentage = (snap.bytesTransferred / snap.totalBytes) * 100
+        setProgress(percentage)
       },
       (err) => {
-        setError(err);
+        setError(err)
       },
       async () => {
-        const url = await storageRef.getDownloadURL();
-        const createdAt = await timestamp();
-        const userId = user?._id;
-        const userName = user?.fullName ? user?.fullName : user?.groupName;
-        const userAvatar = user?.avatar;
-        const Id = uuidv4();
+        const url = await storageRef.getDownloadURL()
+        const createdAt = await timestamp()
+        const userId = user?._id
+        const userName = user?.fullName ? user?.fullName : user?.groupName
+        const userAvatar = user?.avatar
+        const Id = uuidv4()
 
         const body = {
           text: description,
@@ -55,7 +55,7 @@ const UseStorage = (
           url: `${url}`,
           type: type,
           user: userId,
-        };
+        }
 
         await api
           .post('/posts', body)
@@ -71,22 +71,23 @@ const UseStorage = (
               userName,
               userAvatar,
               Id,
-            });
-            await setAlert('Portfolio updated Successfully', 'success');
-            await setUpload(false);
-            await setTitle('');
-            await setDescription('');
-            await setStringLength(0);
-            await setDisplay(preview);
+            })
+            await setAlert('Portfolio updated Successfully', 'success')
+            await setUpload(false)
+            await setTitle('')
+            await setDescription('')
+            await setStringLength(0)
+            await setDisplay(preview)
           })
 
           .catch((err) => {
-            alert(JSON.stringify(err));
-          });
+            console.log('hi')
+            alert(JSON.stringify(err))
+          })
 
-        setUrl(url);
+        setUrl(url)
       }
-    );
+    )
   }, [
     description,
     file,
@@ -103,9 +104,9 @@ const UseStorage = (
     setDescription,
     setStringLength,
     setDisplay,
-  ]);
+  ])
 
-  return { progress, url, error };
-};
+  return { progress, url, error }
+}
 
-export default UseStorage;
+export default UseStorage
